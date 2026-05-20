@@ -1,0 +1,10 @@
+{
+  "name": "rag-support-assistant-ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Localhost UI for the RAG internship project",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

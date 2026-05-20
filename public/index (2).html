@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAG Support Assistant</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="brand-card">
+          <p class="eyebrow">RAG Internship Project</p>
+          <h1>Customer Support Assistant</h1>
+          <p class="muted">
+            Upload a PDF knowledge base, ask questions, and review whether the
+            system answers directly or escalates to a human.
+          </p>
+        </div>
+
+        <section class="panel upload-panel">
+          <div class="panel-header">
+            <h2>Knowledge Base</h2>
+            <span class="status-pill" id="kbStatus">Loading</span>
+          </div>
+          <label class="upload-zone" for="pdfInput" id="uploadZone">
+            <input type="file" id="pdfInput" accept="application/pdf" hidden />
+            <span class="upload-title">Drop PDF here or click to upload</span>
+            <span class="upload-subtitle">The assistant will switch to the uploaded document.</span>
+          </label>
+          <button class="primary-button" id="uploadButton">Upload PDF</button>
+          <div class="meta-card">
+            <p class="meta-label">Active Source</p>
+            <p class="meta-value" id="sourceName">knowledge_base.pdf</p>
+            <p class="meta-label">Indexed Chunks</p>
+            <p class="meta-value" id="chunkCount">0</p>
+          </div>
+          <div class="preview-card" id="previewCard">
+            <p class="meta-label">PDF Preview</p>
+            <p class="muted" id="previewText">Upload a PDF to preview its extracted content.</p>
+          </div>
+        </section>
+
+        <section class="panel sample-panel">
+          <div class="panel-header">
+            <h2>Try Sample Queries</h2>
+          </div>
+          <div class="sample-list">
+            <button class="sample-chip">How do I reset my password?</button>
+            <button class="sample-chip">How can I track my order?</button>
+            <button class="sample-chip">When will my refund arrive?</button>
+            <button class="sample-chip">I have an urgent legal complaint</button>
+          </div>
+        </section>
+      </aside>
+
+      <main class="main-panel">
+        <section class="hero">
+          <div>
+            <p class="eyebrow">Localhost Demo</p>
+            <h2>Ask grounded support questions from your PDF</h2>
+          </div>
+          <div class="hero-badges">
+            <span class="hero-badge">RAG Retrieval</span>
+            <span class="hero-badge">Intent Routing</span>
+            <span class="hero-badge">HITL Escalation</span>
+          </div>
+        </section>
+
+        <section class="chat-card">
+          <div class="chat-header">
+            <div>
+              <h3>Assistant Chat</h3>
+              <p class="muted">Answers use the uploaded knowledge base as context.</p>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+            <article class="message assistant">
+              <div class="message-avatar">AI</div>
+              <div class="message-body">
+                <p>
+                  Your assistant is ready. Upload a customer-support PDF or use
+                  the built-in sample knowledge base.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <form class="chat-form" id="chatForm">
+            <textarea
+              id="queryInput"
+              placeholder="Ask something like: How do I reset my password?"
+              rows="3"
+            ></textarea>
+            <button class="primary-button" type="submit" id="sendButton">Send</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <template id="messageTemplate">
+      <article class="message">
+        <div class="message-avatar"></div>
+        <div class="message-body">
+          <p class="message-text"></p>
+          <div class="insight-box hidden">
+            <p class="insight-line"><strong>Intent:</strong> <span class="intent-value"></span></p>
+            <p class="insight-line"><strong>Confidence:</strong> <span class="confidence-value"></span></p>
+            <p class="insight-line"><strong>Source:</strong> <span class="source-value"></span></p>
+            <p class="insight-line human-line hidden"><strong>HITL:</strong> <span class="human-value"></span></p>
+            <div class="context-list"></div>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+  </html>
